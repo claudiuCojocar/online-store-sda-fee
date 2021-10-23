@@ -12,9 +12,15 @@ export class AuthorisationService {
   login(email: string, password: string): Observable<any> {
     return this.httpClient.post("http://localhost:8081/users/login", {}, {
       headers: {
-        Authorization: 'Basic ' + btoa(email + ":" + password)
+        Authorization: this.buildAuthorizationHeaders(email, password)
       }
     })
+  }
+
+  buildAuthorizationHeaders(email: string, password: string): string {
+    const authHeader = 'Basic ' + btoa(email + ":" + password);
+    localStorage.setItem("auth_header", authHeader);
+    return authHeader;
   }
 
 }
