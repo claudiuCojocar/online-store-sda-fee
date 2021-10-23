@@ -18,3 +18,22 @@ export interface Category {
   name: string;
   description: string;
 }
+
+export interface ProductRequest {
+  name: string;
+  description: string;
+  imageURL: string;
+  price: number;
+  stock: number;
+  categoryId: number;
+}
+
+export interface ProductFiltering {
+  pageNumber: number;
+  pageSize: number;
+  name?: string;
+  minPrice?: number;
+  maxPrice?: number;
+  categoryId?: number;
+  sortByPrice?: string;
+}

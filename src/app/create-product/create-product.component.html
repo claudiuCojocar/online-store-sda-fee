@@ -1,0 +1,38 @@
+<div>
+  <form class="product-form">
+    <mat-form-field>
+      <mat-label>Product name</mat-label>
+      <input matInput [(ngModel)]="product.name" name="product-name">
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Stock</mat-label>
+      <input matInput [(ngModel)]="product.stock" name="product-stock" type="number">
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Price</mat-label>
+      <input matInput [(ngModel)]="product.price" name="product-price" type="number">
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Category</mat-label>
+      <mat-select name="category" [(ngModel)]="product.categoryId">
+        <mat-option *ngFor="let category of categoryArray" value="{{category.id}}">{{category.name}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Description</mat-label>
+      <textarea matInput [(ngModel)]="product.description" name="product-description"></textarea>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Image URL</mat-label>
+      <input matInput [(ngModel)]="product.imageURL" name="image-url">
+    </mat-form-field>
+
+    <button mat-raised-button (click)="createProduct()">Save</button>
+
+  </form>
+</div>

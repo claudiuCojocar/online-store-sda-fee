@@ -1,0 +1,39 @@
+.product-card {
+  max-width: 300px;
+  min-width: 300px;
+  min-height: 500px;
+  max-height: 500px;
+  float: left;
+  margin: 10px;
+}
+
+.description-paragraph{
+  min-height: 150px;
+}
+
+.product-image{
+  object-fit: cover; /*this makes the image in src fit to the size specified below*/
+  width: 100%; /* Here you can use wherever you want to specify the width and also the height of the <img>*/
+  height: 80%;
+}
+
+#filtering-container {
+  width: 15%;
+  float:left;
+  height: 100%;
+}
+
+#product-card-wrapper {
+  width: 75%;
+  height: 100%;
+  float:right;
+}
+
+#product-container {
+  width: 100%;
+  overflow: auto;
+}
+
+#page-div {
+  padding: 15px;
+}
