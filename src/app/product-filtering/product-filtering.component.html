@@ -1,0 +1,30 @@
+<mat-form-field>
+  <mat-label>Name</mat-label>
+  <input matInput name="product-filter-by-name" (keyup)="emit($event)">
+</mat-form-field>
+
+<mat-form-field>
+  <mat-label>Min price</mat-label>
+  <input matInput name="product-filter-by-min-price" (keyup) = "emitMinPrice($event)" type="number">
+</mat-form-field>
+
+<mat-form-field>
+  <mat-label>Max price</mat-label>
+  <input matInput name="product-filter-by-max-price" (keyup) = "emitMaxPrice($event)" type="number">
+</mat-form-field>
+
+<mat-form-field>
+  <mat-label>Category</mat-label>
+  <mat-select name="product-filter-by-category" (selectionChange)="emitCategoryId($event)">
+    <mat-option *ngFor="let category of categoryArray" value="{{category.id}}">{{category.name}}</mat-option>
+  </mat-select>
+</mat-form-field>
+
+<mat-form-field>
+  <mat-label>Sort by price</mat-label>
+  <mat-select name="sort-by-price" (selectionChange)="emitSortByPrice($event)">
+    <mat-option value="no-sort">No sorting</mat-option>
+    <mat-option value="asc">Ascedent</mat-option>
+    <mat-option value="desc">Descendent</mat-option>
+  </mat-select>
+</mat-form-field>

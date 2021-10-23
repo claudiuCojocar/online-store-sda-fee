@@ -12,12 +12,20 @@ import {FormsModule} from "@angular/forms";
 import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import { ProductPageComponent } from './product-page/product-page.component';
 import {AuthInterceptorService} from "./auth-interceptor.service";
+import {MatCardModule} from "@angular/material/card";
+import { CreateProductComponent } from './create-product/create-product.component';
+import {MatSelectModule} from "@angular/material/select";
+import {MatOptionModule} from "@angular/material/core";
+import {MatPaginatorModule} from "@angular/material/paginator";
+import { ProductFilteringComponent } from './product-filtering/product-filtering.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    ProductPageComponent
+    ProductPageComponent,
+    CreateProductComponent,
+    ProductFilteringComponent
   ],
   imports: [
     BrowserModule,
@@ -27,7 +35,11 @@ import {AuthInterceptorService} from "./auth-interceptor.service";
     MatInputModule,
     MatButtonModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    MatCardModule,
+    MatSelectModule,
+    MatOptionModule,
+    MatPaginatorModule
   ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorService, multi: true}

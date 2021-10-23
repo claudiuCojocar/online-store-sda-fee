@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
-import {PaginatedProducts} from "./model/product";
+import {PaginatedProducts, ProductFiltering, ProductRequest} from "./model/product";
 
 @Injectable({
   providedIn: 'root'
@@ -12,8 +12,35 @@ export class ProductService {
 
   constructor(private httpClient: HttpClient) { }
 
-  findProducts(pageNumber: number, pageSize: number): Observable<PaginatedProducts>{
-    let PRODUCTS_API_WITH_PAGE_PARAMS = this.PRODUCT_API + "?pageNumber=" + pageNumber + "&pageSize=" + pageSize;
+  findProducts(productFiltering: ProductFiltering): Observable<PaginatedProducts>{
+    let PRODUCTS_API_WITH_PAGE_PARAMS =
+      this.PRODUCT_API + "?pageNumber=" +
+        productFiltering.pageNumber + "&pageSize=" + productFiltering.pageSize;
+
+    if (productFiltering.name) {
+      PRODUCTS_API_WITH_PAGE_PARAMS = PRODUCTS_API_WITH_PAGE_PARAMS + "&name=" + productFiltering.name;
+    }
+
+    if (productFiltering.minPrice) {
+      PRODUCTS_API_WITH_PAGE_PARAMS = PRODUCTS_API_WITH_PAGE_PARAMS + "&minPrice=" + productFiltering.minPrice;
+    }
+
+    if (productFiltering.maxPrice) {
+      PRODUCTS_API_WITH_PAGE_PARAMS = PRODUCTS_API_WITH_PAGE_PARAMS + "&maxPrice=" + productFiltering.maxPrice;
+    }
+
+    if (productFiltering.categoryId) {
+      PRODUCTS_API_WITH_PAGE_PARAMS = PRODUCTS_API_WITH_PAGE_PARAMS + "&categoryId=" + productFiltering.categoryId;
+    }
+
+    if (productFiltering.sortByPrice) {
+      PRODUCTS_API_WITH_PAGE_PARAMS = PRODUCTS_API_WITH_PAGE_PARAMS + "&sortByPrice=" + productFiltering.sortByPrice;
+    }
+
     return this.httpClient.get<PaginatedProducts>(PRODUCTS_API_WITH_PAGE_PARAMS);
+  }
+
+  createProduct(product: ProductRequest): Observable<ProductRequest> {
+    return this.httpClient.post<ProductRequest>(this.PRODUCT_API, product);
   }
 }

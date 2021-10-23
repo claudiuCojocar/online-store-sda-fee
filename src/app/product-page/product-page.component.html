@@ -1,3 +1,42 @@
+<div id="page-div">
+<div id="product-container">
+  <div id="filtering-container">
+    <app-product-filtering
+      (searchByNameEvent)="filterByName($event)"
+      (searchByMinPriceEvent)="filterByMinPrice($event)"
+      (searchByMaxPriceEvent)="filterByMaxPrice($event)"
+      (searchByCategoryIdEvent)="filterByCategoryId($event)"
+      (sortByPriceEvent)="sortByPrice($event)"
+    ></app-product-filtering>
+  </div>
+
+  <div id="product-card-wrapper">
+    <div class="product-cards" style="overflow: auto">
+      <mat-card class="product-card" *ngFor="let product of paginatedProducts.content">
+        <mat-card-header>
+          <mat-card-title>{{product.name}}</mat-card-title>
+          <mat-card-subtitle>{{product.price}}</mat-card-subtitle>
+        </mat-card-header>
+        <img mat-card-image src="{{product.imageURL}}" class="product-image">
+        <mat-card-content>
+          <p class="description-paragraph">
+            {{product.description}}
+          </p>
+        </mat-card-content>
+        <mat-card-actions>
+          <button mat-button>Add to cart</button>
+        </mat-card-actions>
+      </mat-card>
+    </div>
+  </div>
+</div>
+
+
 <div>
-  Hello world
+  <mat-paginator
+    [pageSizeOptions]="[pageSize,10]"
+    [length]="paginatedProducts.totalElements"
+    (page)="changePage($event)"
+  ></mat-paginator>
+</div>
 </div>
