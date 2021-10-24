@@ -1,3 +1,6 @@
+<app-nav-bar
+  [appNavBarProductsInCart]=numberOfProductsInCart *ngIf="getCurrentRole() === 'CUSTOMER'"></app-nav-bar>
+
 <div id="page-div">
 <div id="product-container">
   <div id="filtering-container">
@@ -24,14 +27,21 @@
           </p>
         </mat-card-content>
         <mat-card-actions>
-          <button mat-button>Add to cart</button>
+          <button mat-button (click)="addProductToCart(product.id)"
+                  *ngIf="getCurrentRole()==='CUSTOMER'">Add to cart</button>
+          <button mat-button (click)="deleteProduct(product.id)"
+                  *ngIf="getCurrentRole()==='ADMIN'">
+            Delete
+          </button>
+          <button mat-button (click)="update(product)"
+                  *ngIf="getCurrentRole()==='ADMIN'">
+            Update
+          </button>
         </mat-card-actions>
       </mat-card>
     </div>
   </div>
 </div>
-
-
 <div>
   <mat-paginator
     [pageSizeOptions]="[pageSize,10]"

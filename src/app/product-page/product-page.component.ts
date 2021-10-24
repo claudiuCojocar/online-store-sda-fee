@@ -1,7 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Inject, OnInit} from '@angular/core';
 import {ProductService} from "../product.service";
-import {PaginatedProducts, ProductFiltering} from "../model/product";
+import {PaginatedProducts, Product, ProductFiltering} from "../model/product";
 import {PageEvent} from "@angular/material/paginator";
+import {ShoppingCartService} from "../shopping-cart.service";
+import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from "@angular/material/dialog";
+import {ProductDto} from "../model/shopping-cart";
 
 @Component({
   selector: 'app-product-page',
@@ -22,7 +25,13 @@ export class ProductPageComponent implements OnInit {
     pageNumber: 0
   }
 
-  constructor(private productService: ProductService) { }
+  numberOfProductsInCart = 0;
+
+  constructor(
+    private productService: ProductService,
+    private shoppingCartService: ShoppingCartService,
+    private updateDialog: MatDialog
+  ) { }
 
   // metoda care ruleaza la instantierea componentei
   ngOnInit(): void {
@@ -38,14 +47,6 @@ export class ProductPageComponent implements OnInit {
   filterByName(event: any): void {
     this.productFiltering.name = event;
     this.getProductsFromApi();
-  }
-
-  getProductsFromApi(): void {
-    this.productService.findProducts(this.productFiltering).subscribe((data) => {
-      this.paginatedProducts = data;
-    }, (error) => {
-      console.log(error);
-    })
   }
 
   filterByMinPrice(event: any): void {
@@ -75,4 +76,57 @@ export class ProductPageComponent implements OnInit {
     }
     this.getProductsFromApi();
   }
+
+  getProductsFromApi(): void {
+    this.productService.findProducts(this.productFiltering).subscribe((data) => {
+      this.paginatedProducts = data;
+    }, (error) => {
+      console.log(error);
+    })
+  }
+
+  addProductToCart(id: number): void {
+    this.shoppingCartService.addProductToShoppingCart(id).subscribe((data) => {
+      this.numberOfProductsInCart =  data.productDtos.length;
+    }, (error) => {
+      console.log(error)
+    });
+  }
+
+  deleteProduct(id: number): void {
+    this.productService.deleteProduct(id).subscribe((data) => {
+      this.getProductsFromApi();
+    })
+  }
+
+  getCurrentRole(): string | null {
+    return localStorage.getItem('ROLE');
+  }
+
+  update(product: Product): void {
+    this.updateDialog.open(ProductUpdateDialogComponent, {data: product})
+  }
+}
+
+
+@Component({
+  selector: 'product-update',
+  templateUrl: 'update-view.html'
+})
+export class ProductUpdateDialogComponent implements OnInit {
+
+  constructor(@Inject(MAT_DIALOG_DATA) public data: Product, public updateDialog: MatDialogRef<ProductPageComponent>) {
+  }
+
+  ngOnInit(): void {
+  }
+
+  close() {
+    this.updateDialog.close();
+  }
+
+  updateProduct() {
+    // o sa foloseasca productService.updateProduct(id, data)
+  }
+
 }

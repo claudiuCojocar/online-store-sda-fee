@@ -19,7 +19,13 @@ export class LoginComponent implements OnInit {
 
   login(): void {
     this.authService.login(this.email, this.password).subscribe((data: any) => {
-      this.router.navigate(['/products']);
+      console.log(data);
+      localStorage.setItem("ROLE", data.role);
+      if (localStorage.getItem('ROLE') === 'ADMIN') {
+       this.router.navigate(['/management']);
+      } else {
+        this.router.navigate(['/products']);
+      }
     }, (error:any) => {
       console.log("ERRROR");
       console.log(error)

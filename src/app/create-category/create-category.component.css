@@ -1,0 +1,9 @@
+mat-form-field {
+  display: block;
+  float: none;
+}
+
+div {
+  max-width: 75%;
+  margin: 0 auto;
+}
