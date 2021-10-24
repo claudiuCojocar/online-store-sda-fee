@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import {MatTableDataSource} from "@angular/material/table";
 import {ProductDto} from "../model/shopping-cart";
 import {ShoppingCartService} from "../shopping-cart.service";
+import {OrderService} from "../order.service";
+import {MatSnackBar} from "@angular/material/snack-bar";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-shopping-cart-preview',
@@ -15,7 +18,12 @@ export class ShoppingCartPreviewComponent implements OnInit {
   numberOfProductsInCart = 0;
   totalCost = 0;
 
-  constructor(private shoppingCartService: ShoppingCartService) { }
+  constructor(
+    private shoppingCartService: ShoppingCartService,
+    private orderService: OrderService,
+    private matSnackBar: MatSnackBar,
+    private router: Router
+  ) { }
 
   ngOnInit(): void {
     this.shoppingCartService.getShoppingCart().subscribe((data) => {
@@ -37,6 +45,15 @@ export class ShoppingCartPreviewComponent implements OnInit {
     }, (error) => {
       console.log(error);
     });
+  }
+
+  placeOrder(): void {
+    this.orderService.createOrder().subscribe((data) => {
+      this.matSnackBar.open("Succesfully place order", undefined, {duration: 1000});
+      this.router.navigate(['/orders']);
+    }, (error) => {
+      console.log("error");
+    })
   }
 
 }

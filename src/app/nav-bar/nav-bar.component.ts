@@ -1,5 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {ShoppingCartService} from "../shopping-cart.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-nav-bar',
@@ -8,15 +9,22 @@ import {ShoppingCartService} from "../shopping-cart.service";
 })
 export class NavBarComponent implements OnInit {
 
-  @Input() numberOfProductsInCart = 0;
+  @Input() appNavBarProductsInCart = 0;
 
-  constructor(private shoppingCartService: ShoppingCartService) { }
+  constructor(
+    private shoppingCartService: ShoppingCartService,
+    private router: Router
+  ) { }
 
   ngOnInit(): void {
     this.shoppingCartService.getShoppingCart().subscribe((data) => {
-      this.numberOfProductsInCart = data.productDtos.length;
+      this.appNavBarProductsInCart = data.productDtos.length;
     })
+  }
 
+  logout(): void {
+    localStorage.clear();
+    this.router.navigate(['/login']);
   }
 
 }

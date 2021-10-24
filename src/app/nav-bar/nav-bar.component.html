@@ -3,12 +3,32 @@
     Online store
   </span>
   <span class="toolbar-spacer"></span>
+
+  <a mat-icon-button [routerLink]="['/products']">
+    <mat-icon>
+      home
+    </mat-icon>
+  </a>
+
   <a mat-icon-button [routerLink]="['/shopping-cart']">
     <mat-icon matBadge="{{numberOfProductsInCart}}" matBadgePosition="before">
       shopping_cart
     </mat-icon>
   </a>
-  <button mat-raised-button>
+
+  <a mat-icon-button [routerLink]="['/orders']">
+    <mat-icon>
+      menu_book
+    </mat-icon>
+  </a>
+
+  <a mat-icon-button [routerLink]="['/favorite']">
+    <mat-icon>
+      favorite
+    </mat-icon>
+  </a>
+
+  <button mat-raised-button (click)="logout()">
     <mat-label>
       Logout
     </mat-label>

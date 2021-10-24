@@ -4,12 +4,16 @@ import {LoginComponent} from "./login/login.component";
 import {ProductPageComponent} from "./product-page/product-page.component";
 import {CreateProductComponent} from "./create-product/create-product.component";
 import {ShoppingCartPreviewComponent} from "./shopping-cart-preview/shopping-cart-preview.component";
+import {OrderComponent} from "./order/order.component";
+import {ProductManagementComponent} from "./product-management/product-management.component";
 
 const routes: Routes = [
   {path: 'login', component: LoginComponent},
   {path: 'products', component: ProductPageComponent},
   {path: 'create-product', component: CreateProductComponent},
-  {path: 'shopping-cart', component: ShoppingCartPreviewComponent}
+  {path: 'shopping-cart', component: ShoppingCartPreviewComponent},
+  {path: 'orders', component: OrderComponent},
+  {path: 'management', component: ProductManagementComponent}
 ];
 
 @NgModule({

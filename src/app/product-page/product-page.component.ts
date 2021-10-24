@@ -1,8 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Inject, OnInit} from '@angular/core';
 import {ProductService} from "../product.service";
-import {PaginatedProducts, ProductFiltering} from "../model/product";
+import {PaginatedProducts, Product, ProductFiltering} from "../model/product";
 import {PageEvent} from "@angular/material/paginator";
 import {ShoppingCartService} from "../shopping-cart.service";
+import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from "@angular/material/dialog";
+import {ProductDto} from "../model/shopping-cart";
 
 @Component({
   selector: 'app-product-page',
@@ -27,7 +29,8 @@ export class ProductPageComponent implements OnInit {
 
   constructor(
     private productService: ProductService,
-    private shoppingCartService: ShoppingCartService
+    private shoppingCartService: ShoppingCartService,
+    private updateDialog: MatDialog
   ) { }
 
   // metoda care ruleaza la instantierea componentei
@@ -89,4 +92,41 @@ export class ProductPageComponent implements OnInit {
       console.log(error)
     });
   }
+
+  deleteProduct(id: number): void {
+    this.productService.deleteProduct(id).subscribe((data) => {
+      this.getProductsFromApi();
+    })
+  }
+
+  getCurrentRole(): string | null {
+    return localStorage.getItem('ROLE');
+  }
+
+  update(product: Product): void {
+    this.updateDialog.open(ProductUpdateDialogComponent, {data: product})
+  }
+}
+
+
+@Component({
+  selector: 'product-update',
+  templateUrl: 'update-view.html'
+})
+export class ProductUpdateDialogComponent implements OnInit {
+
+  constructor(@Inject(MAT_DIALOG_DATA) public data: Product, public updateDialog: MatDialogRef<ProductPageComponent>) {
+  }
+
+  ngOnInit(): void {
+  }
+
+  close() {
+    this.updateDialog.close();
+  }
+
+  updateProduct() {
+    // o sa foloseasca productService.updateProduct(id, data)
+  }
+
 }

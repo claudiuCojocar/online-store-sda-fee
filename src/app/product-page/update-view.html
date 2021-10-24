@@ -1,0 +1,41 @@
+<h1 mat-dialog-title>
+  Edit product
+</h1>
+<div mat-dialog-content>
+  <mat-form-field>
+    <mat-label>Product name</mat-label>
+    <input matInput [(ngModel)]="data.name" name="product-name">
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Stock</mat-label>
+    <input matInput [(ngModel)]="data.stock" name="product-stock" type="number">
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Price</mat-label>
+    <input matInput [(ngModel)]="data.price" name="product-price" type="number">
+  </mat-form-field>
+
+<!--  <mat-form-field>-->
+<!--    <mat-label>Category</mat-label>-->
+<!--    <mat-select name="category" [(ngModel)]="data.categoryId">-->
+<!--      <mat-option *ngFor="let category of categoryArray" value="{{category.id}}">{{category.name}}</mat-option>-->
+<!--    </mat-select>-->
+<!--  </mat-form-field>-->
+
+  <mat-form-field>
+    <mat-label>Description</mat-label>
+    <textarea matInput [(ngModel)]="data.description" name="product-description"></textarea>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Image URL</mat-label>
+    <input matInput [(ngModel)]="data.imageURL" name="image-url">
+  </mat-form-field>
+</div>
+
+<div mat-dialog-actions>
+  <button mat-button (click)="close()"> close </button>
+  <button mat-button (click)="updateProduct()"> save </button>
+</div>

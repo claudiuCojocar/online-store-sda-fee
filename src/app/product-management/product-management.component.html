@@ -1,0 +1,25 @@
+<mat-toolbar>
+  <button mat-button [matMenuTriggerFor]="product">Product</button>
+  <mat-menu #product="matMenu">
+    <button mat-menu-item (click)="changeState('CREATE_PRODUCT')">Create product</button>
+    <button mat-menu-item (click)="changeState('VIEW_PRODUCTS')">View products</button>
+  </mat-menu>
+
+  <button mat-button [matMenuTriggerFor]="category">Category</button>
+  <mat-menu #category="matMenu">
+    <button mat-menu-item (click)="changeState('CREATE_CATEGORY')">Create category</button>
+    <button mat-menu-item (click)="changeState('VIEW_CATEGORIES')">View categories</button>
+  </mat-menu>
+
+  <button mat-raised-button (click)="logout()">
+    <mat-label>
+      Logout
+    </mat-label>
+  </button>
+</mat-toolbar>
+
+<div>
+  <app-create-product *ngIf="state === 'CREATE_PRODUCT'"></app-create-product>
+  <app-create-category *ngIf="state === 'CREATE_CATEGORY'"></app-create-category>
+  <app-product-page *ngIf="state === 'VIEW_PRODUCTS'"></app-product-page>
+</div>

@@ -1,0 +1,31 @@
+<app-nav-bar></app-nav-bar>
+
+<div>
+  <span>My orders</span>
+</div>
+
+<div>
+  <mat-accordion>
+    <mat-expansion-panel *ngFor="let order of orderList">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          ID
+        </mat-panel-title>
+        <mat-panel-description>
+          {{order.id}} | {{order.date}}
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+     <table>
+       <tr>
+         <th>Name</th>
+         <th>Price</th>
+       </tr>
+       <tr *ngFor="let product of order.productOrderCopyList">
+         <td>{{product.name}}</td>
+         <td>{{product.price}}</td>
+       </tr>
+     </table>
+      <b>Total: {{order.total}}</b>
+    </mat-expansion-panel>
+  </mat-accordion>
+</div>
