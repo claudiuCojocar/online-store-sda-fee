@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {ProductService} from "../product.service";
 import {PaginatedProducts, ProductFiltering} from "../model/product";
 import {PageEvent} from "@angular/material/paginator";
+import {ShoppingCartService} from "../shopping-cart.service";
 
 @Component({
   selector: 'app-product-page',
@@ -22,7 +23,12 @@ export class ProductPageComponent implements OnInit {
     pageNumber: 0
   }
 
-  constructor(private productService: ProductService) { }
+  numberOfProductsInCart = 0;
+
+  constructor(
+    private productService: ProductService,
+    private shoppingCartService: ShoppingCartService
+  ) { }
 
   // metoda care ruleaza la instantierea componentei
   ngOnInit(): void {
@@ -38,14 +44,6 @@ export class ProductPageComponent implements OnInit {
   filterByName(event: any): void {
     this.productFiltering.name = event;
     this.getProductsFromApi();
-  }
-
-  getProductsFromApi(): void {
-    this.productService.findProducts(this.productFiltering).subscribe((data) => {
-      this.paginatedProducts = data;
-    }, (error) => {
-      console.log(error);
-    })
   }
 
   filterByMinPrice(event: any): void {
@@ -74,5 +72,21 @@ export class ProductPageComponent implements OnInit {
       this.productFiltering.sortByPrice = event;
     }
     this.getProductsFromApi();
+  }
+
+  getProductsFromApi(): void {
+    this.productService.findProducts(this.productFiltering).subscribe((data) => {
+      this.paginatedProducts = data;
+    }, (error) => {
+      console.log(error);
+    })
+  }
+
+  addProductToCart(id: number): void {
+    this.shoppingCartService.addProductToShoppingCart(id).subscribe((data) => {
+      this.numberOfProductsInCart =  data.productDtos.length;
+    }, (error) => {
+      console.log(error)
+    });
   }
 }

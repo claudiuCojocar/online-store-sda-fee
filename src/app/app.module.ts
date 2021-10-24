@@ -18,6 +18,12 @@ import {MatSelectModule} from "@angular/material/select";
 import {MatOptionModule} from "@angular/material/core";
 import {MatPaginatorModule} from "@angular/material/paginator";
 import { ProductFilteringComponent } from './product-filtering/product-filtering.component';
+import { NavBarComponent } from './nav-bar/nav-bar.component';
+import {MatToolbarModule} from "@angular/material/toolbar";
+import {MatIconModule} from "@angular/material/icon";
+import {MatBadgeModule} from "@angular/material/badge";
+import { ShoppingCartPreviewComponent } from './shopping-cart-preview/shopping-cart-preview.component';
+import {MatTableModule} from "@angular/material/table";
 
 @NgModule({
   declarations: [
@@ -25,22 +31,28 @@ import { ProductFilteringComponent } from './product-filtering/product-filtering
     LoginComponent,
     ProductPageComponent,
     CreateProductComponent,
-    ProductFilteringComponent
+    ProductFilteringComponent,
+    NavBarComponent,
+    ShoppingCartPreviewComponent
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    BrowserAnimationsModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatButtonModule,
-    FormsModule,
-    HttpClientModule,
-    MatCardModule,
-    MatSelectModule,
-    MatOptionModule,
-    MatPaginatorModule
-  ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        BrowserAnimationsModule,
+        MatFormFieldModule,
+        MatInputModule,
+        MatButtonModule,
+        FormsModule,
+        HttpClientModule,
+        MatCardModule,
+        MatSelectModule,
+        MatOptionModule,
+        MatPaginatorModule,
+        MatToolbarModule,
+        MatIconModule,
+        MatBadgeModule,
+        MatTableModule
+    ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorService, multi: true}
   ],

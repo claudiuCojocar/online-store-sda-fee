@@ -1,0 +1,16 @@
+<mat-toolbar>
+  <span>
+    Online store
+  </span>
+  <span class="toolbar-spacer"></span>
+  <a mat-icon-button [routerLink]="['/shopping-cart']">
+    <mat-icon matBadge="{{numberOfProductsInCart}}" matBadgePosition="before">
+      shopping_cart
+    </mat-icon>
+  </a>
+  <button mat-raised-button>
+    <mat-label>
+      Logout
+    </mat-label>
+  </button>
+</mat-toolbar>
