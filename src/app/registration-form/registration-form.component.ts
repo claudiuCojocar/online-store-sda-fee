@@ -3,6 +3,7 @@ import {Address, UserDto} from "../model/user";
 import {UserService} from "../user.service";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {Router} from "@angular/router";
+import {HttpErrorResponse} from "@angular/common/http";
 
 @Component({
   selector: 'app-registration-form',
@@ -32,6 +33,8 @@ export class RegistrationFormComponent implements OnInit {
     this.userService.register(this.userDto).subscribe( (success) => {
       this.matSnackBar.open("Registration went succesfully", undefined, {duration: 1000});
       this.router.navigate(['/login']);
+    }, (errorResponse: HttpErrorResponse) => {
+      this.matSnackBar.open(errorResponse.error.message, undefined, {duration: 1500});
     })
   }
 }

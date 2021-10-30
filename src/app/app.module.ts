@@ -35,6 +35,11 @@ import { ProductViewComponent } from './product-view/product-view.component';
 import {MAT_DIALOG_DEFAULT_OPTIONS, MatDialogModule} from "@angular/material/dialog";
 import { RegistrationFormComponent } from './registration-form/registration-form.component';
 import { NotAuthorizedComponent } from './not-authorized/not-authorized.component';
+import {
+  CategoryTableComponent, DeleteCategoryViewComponent,
+  ProductCategoryViewComponent,
+  UpdateCategoryViewComponent
+} from './category-table/category-table.component';
 
 @NgModule({
   declarations: [
@@ -51,7 +56,11 @@ import { NotAuthorizedComponent } from './not-authorized/not-authorized.componen
     ProductViewComponent,
     ProductUpdateDialogComponent,
     RegistrationFormComponent,
-    NotAuthorizedComponent
+    NotAuthorizedComponent,
+    CategoryTableComponent,
+    ProductCategoryViewComponent,
+    UpdateCategoryViewComponent,
+    DeleteCategoryViewComponent
   ],
   imports: [
     BrowserModule,
