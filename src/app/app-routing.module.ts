@@ -6,14 +6,20 @@ import {CreateProductComponent} from "./create-product/create-product.component"
 import {ShoppingCartPreviewComponent} from "./shopping-cart-preview/shopping-cart-preview.component";
 import {OrderComponent} from "./order/order.component";
 import {ProductManagementComponent} from "./product-management/product-management.component";
+import {RegistrationFormComponent} from "./registration-form/registration-form.component";
+import {RouteGuardService} from "./route-guard.service";
+import {AdminRouteGuardService} from "./admin-route-guard.service";
+import {NotAuthorizedComponent} from "./not-authorized/not-authorized.component";
 
 const routes: Routes = [
   {path: 'login', component: LoginComponent},
-  {path: 'products', component: ProductPageComponent},
-  {path: 'create-product', component: CreateProductComponent},
-  {path: 'shopping-cart', component: ShoppingCartPreviewComponent},
-  {path: 'orders', component: OrderComponent},
-  {path: 'management', component: ProductManagementComponent}
+  {path: 'registration', component: RegistrationFormComponent},
+  {path: 'not-authorized', component: NotAuthorizedComponent},
+  {path: 'products', component: ProductPageComponent, canActivate: [RouteGuardService]},
+  {path: 'create-product', component: CreateProductComponent, canActivate: [RouteGuardService]},
+  {path: 'shopping-cart', component: ShoppingCartPreviewComponent, canActivate: [RouteGuardService]},
+  {path: 'orders', component: OrderComponent, canActivate: [RouteGuardService]},
+  {path: 'management', component: ProductManagementComponent, canActivate: [RouteGuardService, AdminRouteGuardService]}
 ];
 
 @NgModule({

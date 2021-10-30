@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
-import {PaginatedProducts, ProductFiltering, ProductRequest} from "./model/product";
+import {PaginatedProducts, Product, ProductFiltering, ProductRequest} from "./model/product";
 
 @Injectable({
   providedIn: 'root'
@@ -46,5 +46,13 @@ export class ProductService {
 
   deleteProduct(id: number): Observable<any> {
     return this.httpClient.delete<any>(this.PRODUCT_API + "/" + id);
+  }
+
+  updateProduct(id: number, product: ProductRequest): Observable<ProductRequest> {
+    return this.httpClient.put<ProductRequest>(this.PRODUCT_API + "/" + id, product);
+  }
+
+  getAllByCategory(id: number): Observable<Product[]> {
+    return this.httpClient.get<Product[]>(this.PRODUCT_API + "/categories/" + id);
   }
 }

@@ -1,0 +1,46 @@
+<div id="registration-form">
+  <mat-form-field>
+    <mat-label>
+      Email
+    </mat-label>
+    <input matInput name="email" [(ngModel)]="userDto.email" >
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>
+      Password
+    </mat-label>
+    <input matInput name="password" type="password" [(ngModel)]="userDto.password">
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>
+      First Name
+    </mat-label>
+    <input matInput name="firstName" type="text" [(ngModel)]="userDto.firstName">
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>
+      Last Name
+    </mat-label>
+    <input matInput name="lastName" type="text" [(ngModel)]="userDto.lastName">
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>
+      City
+    </mat-label>
+    <input matInput name="city" type="text" [(ngModel)]="userAddress.city">
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>
+      County
+    </mat-label>
+    <input matInput name="county" type="text" [(ngModel)]="userAddress.county">
+  </mat-form-field>
+
+  <button mat-raised-button name="register" (click)="save()">Register</button>
+
+</div>

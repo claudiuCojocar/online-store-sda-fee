@@ -18,4 +18,12 @@ export class CategoryService {
   createCategory(category: Category): Observable<Category> {
     return this.httpClient.post<Category>(this.CATEGORY_API, category);
   }
+
+  update(id: number, category: Category): Observable<Category> {
+    return this.httpClient.put<Category>(this.CATEGORY_API + "/" + id, category);
+  }
+
+  delete(id: number): Observable<any> {
+    return this.httpClient.delete<any>(this.CATEGORY_API + "/" + id);
+  }
 }

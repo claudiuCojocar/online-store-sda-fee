@@ -1,0 +1,16 @@
+<mat-form-field>
+  <mat-label>
+    Name
+  </mat-label>
+  <input matInput [(ngModel)]="data.name" name="category-name">
+</mat-form-field>
+
+<mat-form-field>
+  <mat-label>
+    Description
+  </mat-label>
+  <input matInput [(ngModel)]="data.description" name="category-description">
+</mat-form-field>
+
+<button mat-button (click)="close()">Close</button>
+<button mat-button (click)="edit()">Save</button>
