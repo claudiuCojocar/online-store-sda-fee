@@ -1,10 +1,12 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {ProductService} from "../product.service";
-import {PaginatedProducts, Product, ProductFiltering} from "../model/product";
+import {Category, PaginatedProducts, Product, ProductFiltering, ProductRequest} from "../model/product";
 import {PageEvent} from "@angular/material/paginator";
 import {ShoppingCartService} from "../shopping-cart.service";
 import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from "@angular/material/dialog";
 import {ProductDto} from "../model/shopping-cart";
+import {CategoryService} from "../category.service";
+import {MatSnackBar} from "@angular/material/snack-bar";
 
 @Component({
   selector: 'app-product-page',
@@ -111,14 +113,29 @@ export class ProductPageComponent implements OnInit {
 
 @Component({
   selector: 'product-update',
-  templateUrl: 'update-view.html'
+  templateUrl: 'update-view.html',
+  styleUrls: ['update-view.css']
 })
 export class ProductUpdateDialogComponent implements OnInit {
 
-  constructor(@Inject(MAT_DIALOG_DATA) public data: Product, public updateDialog: MatDialogRef<ProductPageComponent>) {
+  categoryArray: Category[] = [];
+  selectedCategoryId: number = 0;
+
+  constructor(
+    @Inject(MAT_DIALOG_DATA) public data: Product,
+    public updateDialog: MatDialogRef<ProductPageComponent>,
+    public categoryService: CategoryService,
+    public productService: ProductService,
+    public matSnackBar: MatSnackBar
+    ) {
   }
 
   ngOnInit(): void {
+    this.categoryService.getCategories().subscribe( (data) => {
+      this.categoryArray = data;
+    })
+    this.selectedCategoryId = this.data.category.id;
+    console.log("productIs", this.data);
   }
 
   close() {
@@ -126,7 +143,24 @@ export class ProductUpdateDialogComponent implements OnInit {
   }
 
   updateProduct() {
-    // o sa foloseasca productService.updateProduct(id, data)
+    console.log(this.data);
+    let productRequest: ProductRequest = {
+      name: this.data.name,
+      description: this.data.description,
+      stock: this.data.stock,
+      categoryId: this.data.category.id,
+      imageURL: this.data.imageURL,
+      price: this.data.price
+    }
+    this.productService.updateProduct(this.data.id, productRequest).subscribe((succes) => {
+      this.updateDialog.close();
+      this.matSnackBar.open("Product updated", undefined, { duration: 1000});
+    }, (error) => {
+      this.matSnackBar.open("Product update failed", undefined, { duration: 1000});
+    })
   }
 
+  compareCategories(o1: Category, o2: Category): boolean {
+    return o1.id === o2.id
+  }
 }

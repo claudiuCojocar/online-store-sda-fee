@@ -17,12 +17,15 @@
     <input matInput [(ngModel)]="data.price" name="product-price" type="number">
   </mat-form-field>
 
-<!--  <mat-form-field>-->
-<!--    <mat-label>Category</mat-label>-->
-<!--    <mat-select name="category" [(ngModel)]="data.categoryId">-->
-<!--      <mat-option *ngFor="let category of categoryArray" value="{{category.id}}">{{category.name}}</mat-option>-->
-<!--    </mat-select>-->
-<!--  </mat-form-field>-->
+  <!-- TODO predife category-->
+  <mat-form-field>
+    <mat-label>Category</mat-label>
+    <mat-select name="category" [(ngModel)]="data.category" [compareWith]="compareCategories">
+      <mat-option *ngFor="let category of categoryArray" [value]="category" >
+        {{category.name}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
 
   <mat-form-field>
     <mat-label>Description</mat-label>

@@ -47,4 +47,8 @@ export class ProductService {
   deleteProduct(id: number): Observable<any> {
     return this.httpClient.delete<any>(this.PRODUCT_API + "/" + id);
   }
+
+  updateProduct(id: number, product: ProductRequest): Observable<ProductRequest> {
+    return this.httpClient.put<ProductRequest>(this.PRODUCT_API + "/" + id, product);
+  }
 }
