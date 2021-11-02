@@ -8,7 +8,7 @@ import {OrderDto} from "./model/order";
 })
 export class OrderService {
 
-  ORDER_API = 'http://localhost:8081/orders'
+  ORDER_API = 'https://test-aplication312.herokuapp.com/orders'
 
   constructor(private httpClient: HttpClient) { }
 

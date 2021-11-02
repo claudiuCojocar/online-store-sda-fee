@@ -7,7 +7,7 @@ import {Category} from "./model/product";
   providedIn: 'root'
 })
 export class CategoryService {
-  CATEGORY_API = "http://localhost:8081/categories"
+  CATEGORY_API = "https://test-aplication312.herokuapp.com/categories"
 
   constructor(private httpClient: HttpClient) { }
 

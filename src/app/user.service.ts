@@ -8,7 +8,7 @@ import {Observable} from "rxjs";
 })
 export class UserService {
 
-  USER_API = "http://localhost:8081/users"
+  USER_API = "https://test-aplication312.herokuapp.com/users"
 
   constructor(private httpClient: HttpClient) { }
 

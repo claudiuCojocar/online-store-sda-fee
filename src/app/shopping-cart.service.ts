@@ -8,7 +8,7 @@ import {ShoppingCartDto} from "./model/shopping-cart";
 })
 export class ShoppingCartService {
 
-  SHOPPING_CART_API = 'http://localhost:8081/shopping-cart'
+  SHOPPING_CART_API = 'https://test-aplication312.herokuapp.com/shopping-cart'
 
   constructor(private httpClient: HttpClient) { }
 

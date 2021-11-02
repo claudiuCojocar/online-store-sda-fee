@@ -8,7 +8,7 @@ import {PaginatedProducts, Product, ProductFiltering, ProductRequest} from "./mo
 })
 export class ProductService {
 
-  PRODUCT_API = "http://localhost:8081/products"
+  PRODUCT_API = "https://test-aplication312.herokuapp.com/products"
 
   constructor(private httpClient: HttpClient) { }
 
